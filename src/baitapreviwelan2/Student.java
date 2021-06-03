@@ -1,5 +1,8 @@
 package baitapreviwelan2;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Student {
      private String idStudent;
      private String name;
@@ -87,13 +90,16 @@ public class Student {
     public void setAge(int age) {
         this.age = age;
     }
-
+    public int getTuoi(String bornDay){
+        String[] content = bornDay.split("/");
+      return (Integer.parseInt(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy")))) -  Integer.parseInt(content[content.length -1]);
+    }
     @Override
     public String toString() {
         return "Student{" +
                 "idStudent=" + idStudent +
                 ", name='" + name + '\'' +
-                ", bornDay='" + bornDay + '\'' +
+                ", bornDay='" + getTuoi(bornDay) + '\'' +
                 ", gender='" + gender + '\'' +
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +

@@ -69,22 +69,39 @@ public class MainStudent {
                     ql.display();
                     break;
                 case 3:
+                    scanner.nextLine();
                     System.out.println("nhập mã số sinh viên cần update");
                     String id1 = scanner.nextLine();
                     if (ql.findById(id1) == -1){
                         System.out.println("không tìm thấy sinh viên này");
                     }else {
-                        scanner.nextLine();
                         System.out.println("nhập tên sinh viên cần sửa");
                         String name1 = scanner.nextLine();
                         System.out.println("nhập ngày sinh mới");
-                        String bornday1 = scanner.nextLine();
+                        String bornday1;
+                        boolean checkbith1;
+                        do {
+                            bornday1 = scanner.nextLine();
+                            checkbith1 = validate.validateDate(bornday1);
+                            if (checkbith1 == false){
+                                System.out.println("sai định dạng nhập lại");
+                            }
+                        }while (checkbith1 == false);
                         System.out.println("nhập giới tính mơi");
                         String gender1 = scanner.nextLine();
                         System.out.println("nhập địa chỉ mới");
                         String address1 = scanner.nextLine();
                         System.out.println("nhập email mơi");
-                        String email1 = scanner.nextLine();
+                        String email1;
+                        boolean checkemail1;
+                        do {
+                            email1 = scanner.nextLine();
+                            checkemail1 = validate.validateEmail(email1);
+                            if (checkemail1==false){
+                                System.out.println("sai định dạng nhập lại");
+                            }
+
+                        }while (checkemail1 == false);
                         System.out.println("nhập điểm tb mơi");
                         double point1 = scanner.nextDouble();
                         System.out.println("nhập tuổi mới");
@@ -93,6 +110,7 @@ public class MainStudent {
                     }
                     break;
                 case 4:
+                    scanner.nextLine();
                     System.out.println("nhập id sinh viên cần xóa");
                     String id2 = scanner.nextLine();
                     if (ql.findById(id2) == -1){
@@ -107,11 +125,13 @@ public class MainStudent {
                     int option = scanner.nextInt();
                     switch (option){
                         case 1:
+                            scanner.nextLine();
                             System.out.println("nhập mssv cần tìm kiếm");
                             String id3 = scanner.nextLine();
                             ql.seachById(id3);
                             break;
                         case 2:
+                            scanner.nextLine();
                             System.out.println("nhập tên cần tìm kiếm");
                             String name3 = scanner.nextLine();
                             ql.seachByName(name3);
@@ -137,13 +157,16 @@ public class MainStudent {
                     switch (option1){
                         case 1:
                             ql.sortByPoint();
+                            ql.writeFile("data.csv", ql.getList());
                             break;
                         case 2:
                             ql.sortByName();
+                            ql.writeFile("data.csv", ql.getList());
                             break;
                     }
                     break;
                 case 7:
+                   // ReadWireCsv.writeFile("data.csv", ql.getList());
                     ql.writeFile("data.csv", ql.getList());
                     break;
                 case 8:
